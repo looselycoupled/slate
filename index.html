@@ -284,7 +284,7 @@
 
 <h2 id="add">add( )</h2>
 <pre class="highlight python"><code><span class="c"># adds a node to an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 </code></pre>
@@ -366,7 +366,7 @@
 
 <h2 id="filter">filter( )</h2>
 <pre class="highlight python"><code><span class="c"># removes a node from an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
@@ -493,7 +493,7 @@
 
 <h2 id="remove">remove( )</h2>
 <pre class="highlight python"><code><span class="c"># removes a node from an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 <span class="o">...</span>
