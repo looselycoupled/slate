@@ -274,6 +274,49 @@
 </tr>
 </tbody></table>
 
+<h2 id="id">id</h2>
+<pre class="highlight python"><code><span class="c"># print id for a given node</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="nb">id</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">42</span>
+</code></pre>
+
+<p>Read only instance property to return the ID of the given instance.  </p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Int</td>
+<td>Unique identifier for this instance.</td>
+</tr>
+</tbody></table>
+
+<h2 id="network">network</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
+
+<p>Attribute for directly interacting with the object&rsquo;s internal network instance.  Each network instance models internal message passing over a shared resource.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Network</td>
+<td><code class="prettyprint">Network</code> instance object</td>
+</tr>
+</tbody></table>
+
           <h1 id="nbsp-rack">&nbsp; Rack</h1>
 
 <p>The <code class="prettyprint">Rack</code> class represents a physical enclosure for <code class="prettyprint">Node</code> objects.  Racks may be connected to other racks and can be added to clusters.</p>
@@ -284,7 +327,7 @@
 
 <h2 id="add">add( )</h2>
 <pre class="highlight python"><code><span class="c"># adds a node to an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 </code></pre>
@@ -334,7 +377,7 @@
 <span class="n">rack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </code></pre>
 
-<p>A factory method to return a new instance of a <code class="prettyprint">Rack</code> object.</p>
+<p>A factory method to return a generator capable of creating new instances of a <code class="prettyprint">Rack</code> object.</p>
 
 <table><thead>
 <tr>
@@ -366,7 +409,7 @@
 
 <h2 id="filter">filter( )</h2>
 <pre class="highlight python"><code><span class="c"># removes a node from an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
@@ -450,50 +493,9 @@
 </tr>
 </tbody></table>
 
-<h2 id="promulgate">promulgate( )</h2>
-<pre class="highlight python"><code><span class="c"># something goes here</span>
-<span class="k">pass</span>
-</code></pre>
-
-<p><strong>looking for a better name</strong></p>
-
-<p>An instance method to reserve bandwidth for a network operation.  The amount of bandwidth reserved will automatically be freed after the traffic has &ldquo;cleared&rdquo; the network.</p>
-
-<h3 id="named-arguments">Named Arguments</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>size</td>
-<td>Int</td>
-<td>None</td>
-<td>The amount of bandwidth to use</td>
-</tr>
-</tbody></table>
-
-<h3 id="return">Return</h3>
-
-<table><thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>None</td>
-<td>No result</td>
-</tr>
-</tbody></table>
-
 <h2 id="remove">remove( )</h2>
 <pre class="highlight python"><code><span class="c"># removes a node from an existing rack</span>
-<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">base_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">egress_latency</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">myrack</span> <span class="o">=</span> <span class="n">Rack</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">myrack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 <span class="o">...</span>
@@ -590,16 +592,14 @@
 </tr>
 </tbody></table>
 
-<h2 id="latency">latency</h2>
-<pre class="highlight python"><code><span class="n">cluster</span> <span class="o">=</span> <span class="n">Cluster</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">racks</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-
-<span class="n">cluster</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="n">rack</span><span class="o">.</span><span class="n">latency</span>
-
+<h2 id="id">id</h2>
+<pre class="highlight python"><code><span class="c"># print id for a given node</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="nb">id</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">42</span>
 </code></pre>
 
-<p>Read only instance property to return the rack&rsquo;s network latency.  This value is derived from the base_latency plus a function of the available bandwidth.</p>
+<p>Read only instance property to return the ID of the given instance.  </p>
 
 <h3 id="return">Return</h3>
 
@@ -611,22 +611,44 @@
 </thead><tbody>
 <tr>
 <td>Int</td>
-<td>Computed delay associated with network traffic</td>
+<td>Unique identifier for this instance.</td>
+</tr>
+</tbody></table>
+
+<h2 id="network">network</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
+
+<p>Attribute for directly interacting with the object&rsquo;s internal network instance.  Each network instance models internal message passing over a shared resource.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Network</td>
+<td><code class="prettyprint">Network</code> instance object</td>
 </tr>
 </tbody></table>
 
           <h1 id="nbsp-node">&nbsp; Node</h1>
 
+<p>Node inherits from <code class="prettyprint">NamedProcess</code> and represents physical machines in the cluster.</p>
+
 <h2 id="assign">assign( )</h2>
 <pre class="highlight python"><code><span class="c"># create node</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="c"># start processing a new task</span>
-<span class="n">node</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">mytask</span><span class="p">)</span>
+<span class="c"># start processing a new program</span>
+<span class="n">node</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="n">myprogram</span><span class="p">)</span>
 
 </code></pre>
 
-<p>Instance method to start processing a task.</p>
+<p>Instance method to start processing a program.</p>
 
 <h3 id="arguments">Arguments</h3>
 
@@ -639,10 +661,24 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>task</td>
-<td>Task</td>
+<td>program</td>
+<td>Program</td>
 <td></td>
-<td>An instance of <code class="prettyprint">Task</code> to start processing</td>
+<td>An instance of <code class="prettyprint">Program</code> to start processing</td>
+</tr>
+</tbody></table>
+
+<h3 id="throws">Throws</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NodeLacksCapacity</td>
+<td>Node lacks requested resources (cpu, memory, etc.)</td>
 </tr>
 </tbody></table>
 
@@ -665,7 +701,7 @@
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </code></pre>
 
-<p>A factory method to return a new instance of a Node object.</p>
+<p>A factory method to return a generator capable of creating new instances of a Node object.</p>
 
 <h3 id="arguments">Arguments</h3>
 
@@ -759,16 +795,15 @@
 </tr>
 </tbody></table>
 
-<h2 id="work">work( )</h2>
+<h2 id="recv">recv( )</h2>
 <pre class="highlight python"><code><span class="c"># create node</span>
-<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">node_1</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="c"># start processing a new task</span>
-<span class="n">node</span><span class="o">.</span><span class="n">work</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
+<span class="c"># wait to receive a message</span>
+<span class="n">node_1</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 </code></pre>
 
-<p>Instance method to start an arbitrary work phase for the given duration.</p>
+<p>Instance method to receive a message.</p>
 
 <h3 id="arguments">Arguments</h3>
 
@@ -781,10 +816,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>duration</td>
-<td>Int</td>
+<td>?</td>
 <td></td>
-<td>A abstract unit for measuring work to be performed</td>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -797,8 +832,8 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>None</td>
-<td>No result</td>
+<td>?</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -826,14 +861,15 @@
 </tr>
 </tbody></table>
 
-<h2 id="id">id</h2>
-<pre class="highlight python"><code><span class="c"># print id for a given node</span>
+<h2 id="address">address</h2>
+<pre class="highlight python"><code><span class="c"># print address for a given node</span>
 <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="nb">id</span>
+<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="n">address</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="mi">42</span>
 </code></pre>
 
-<p>Read only instance property to return the ID of the given node.  This can be used as a Node address as all nodes in a cluster will have a unique ID.</p>
+<p>Read only instance property to return the address of the given node.  This will <strong>likely</strong>
+be a combination of the rack and node IDs.</p>
 
 <h3 id="return">Return</h3>
 
@@ -845,7 +881,30 @@
 </thead><tbody>
 <tr>
 <td>Int</td>
-<td>Unique identifier for this node.</td>
+<td>Addressable identifier for this node.</td>
+</tr>
+</tbody></table>
+
+<h2 id="id">id</h2>
+<pre class="highlight python"><code><span class="c"># print id for a given node</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">node</span><span class="o">.</span><span class="nb">id</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">42</span>
+</code></pre>
+
+<p>Read only instance property to return the ID of the given instance.  </p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Int</td>
+<td>Unique identifier for this instance.</td>
 </tr>
 </tbody></table>
 
@@ -857,7 +916,7 @@
 
 </code></pre>
 
-<p>Read only instance property to return the number of CPUs not reserved by current tasking.</p>
+<p>Read only instance property to return the number of CPUs not reserved by current programs.</p>
 
 <h3 id="return">Return</h3>
 
@@ -869,7 +928,7 @@
 </thead><tbody>
 <tr>
 <td>Int</td>
-<td>Number of CPUs not reserved by current tasking</td>
+<td>Number of CPUs not reserved by current programs</td>
 </tr>
 </tbody></table>
 
@@ -881,7 +940,7 @@
 
 </code></pre>
 
-<p>Read only instance property to return the total Gigabytes of memory that have not been reserved by current tasking.</p>
+<p>Read only instance property to return the total Gigabytes of memory that have not been reserved by current programing.</p>
 
 <h3 id="return">Return</h3>
 
@@ -893,7 +952,7 @@
 </thead><tbody>
 <tr>
 <td>Int</td>
-<td>Gigabytes of memory that have not been reserved by current tasking.</td>
+<td>Gigabytes of memory that have not been reserved by current programing.</td>
 </tr>
 </tbody></table>
 
@@ -945,20 +1004,88 @@
 </tr>
 </tbody></table>
 
-          <h1 id="nbsp-task">&nbsp; Task</h1>
+<h2 id="network">network</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
 
-<h2 id="execute">execute( )</h2>
+<p>Attribute for directly interacting with the object&rsquo;s internal network instance.  Each network instance models internal message passing over a shared resource.</p>
 
-<p>Kicks off processing of queued actions?</p>
+<h3 id="return">Return</h3>
 
-<p><strong>TBD</strong></p>
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Network</td>
+<td><code class="prettyprint">Network</code> instance object</td>
+</tr>
+</tbody></table>
 
-<h2 id="queue">queue( )</h2>
+          <h1 id="nbsp-program">&nbsp; Program</h1>
+
+<h2 id="create">create( )</h2>
+<pre class="highlight python"><code><span class="c"># create a new program</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Task</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">work</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">cpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">node</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</code></pre>
+
+<p>A factory method to return a new instance of the Program class.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpus</td>
+<td>Int</td>
+<td>1</td>
+<td>Number of available CPUs this program desires</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>Int</td>
+<td>1</td>
+<td>Gigabytes of available memory this program desires</td>
+</tr>
+</tbody></table>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Program</td>
+<td>Instance of the Program class</td>
+</tr>
+</tbody></table>
+
+<h2 id="run">run( )</h2>
 <pre class="highlight python"><code><span class="c"># TBD</span>
 <span class="k">pass</span>
 </code></pre>
 
-<p>An instance method to add an Action to the task.</p>
+<p>Kicks off execution of a simulated program.  This method contains a loop to cycle
+through specific behaviors such as:</p>
+
+<ul>
+<li>wait for recv</li>
+<li>sleep for random time</li>
+<li>does a send to one or more other programs/Node</li>
+<li>repeat</li>
+</ul>
 
 <h3 id="named-arguments">Named Arguments</h3>
 
@@ -971,10 +1098,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>action</td>
-<td>Node</td>
-<td>None</td>
-<td>A single Node object</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -992,37 +1119,12 @@
 </tr>
 </tbody></table>
 
-<h2 id="create">create( )</h2>
-<pre class="highlight python"><code><span class="c"># create a new task</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">Task</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">work</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">cpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">node</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<h2 id="ports">ports</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+<span class="k">pass</span>
 </code></pre>
 
-<p>A factory method to return a new instance of the Task class.</p>
-
-<h3 id="arguments">Arguments</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>cpus</td>
-<td>Int</td>
-<td>1</td>
-<td>Number of available CPUs this task desires</td>
-</tr>
-<tr>
-<td>memory</td>
-<td>Int</td>
-<td>1</td>
-<td>Gigabytes of available memory this task desires</td>
-</tr>
-</tbody></table>
+<p>Attribute to model the ports this program responds to.</p>
 
 <h3 id="return">Return</h3>
 
@@ -1033,22 +1135,24 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Task</td>
-<td>Instance of the Task class</td>
+<td>list</td>
+<td>A list of port numbers this program uses</td>
 </tr>
 </tbody></table>
 
-          <h1 id="nbsp-action">&nbsp; Action</h1>
+          <h1 id="nbsp-network">&nbsp; Network</h1>
 
-<p><strong>This class is still in discussion/definition phase.  It may be removed in favor of something else.</strong></p>
+<p><strong>This class is still in discussion/definition phase.</strong></p>
+
+<p>This class models the available bandwidth and latency for a machine like object.
+It can be found within clusters, racks, and nodes.</p>
 
 <h2 id="create">create( )</h2>
-<pre class="highlight python"><code><span class="c"># create a new task</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">Action</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">work</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">node</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="c"># create a new network</span>
+<span class="k">pass</span>
 </code></pre>
 
-<p>A factory method to return a new instance of the Action class.  Actions are only useful when added to a <code class="prettyprint">Task</code> instance.</p>
+<p>A factory method to return a new instance of the Network class.</p>
 
 <h3 id="arguments">Arguments</h3>
 
@@ -1061,10 +1165,16 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>work</td>
+<td>base_latency</td>
 <td>Int</td>
 <td></td>
-<td>Arbitrary unit of work</td>
+<td>Underlying delay associated with resource</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>Int</td>
+<td></td>
+<td>Amount of total bandwidth in the network</td>
 </tr>
 </tbody></table>
 
@@ -1077,10 +1187,169 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Action</td>
-<td>Instance of the Action class</td>
+<td>Network</td>
+<td>Instance of the Network class</td>
 </tr>
 </tbody></table>
+
+<h2 id="send">send( )</h2>
+<pre class="highlight python"><code><span class="c"># create node</span>
+<span class="n">node_1</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c"># send message from node_1 to another node with an ID of 12</span>
+<span class="n">node_1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">recipient</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre>
+
+<p>Instance method to send a message onto the network.  This will remove available bandwidth.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>size</td>
+<td>Int</td>
+<td>10</td>
+<td>Size of message</td>
+</tr>
+</tbody></table>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Boolean</td>
+<td>Success of the operation</td>
+</tr>
+</tbody></table>
+
+<h2 id="recv">recv( )</h2>
+<pre class="highlight python"><code><span class="c"># create node</span>
+<span class="n">node_1</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c"># wait to receive a message</span>
+<span class="n">node_1</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</code></pre>
+
+<p>Instance method to receive a message off of the network.    This will add available bandwidth.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>?</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>?</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="bandwidth">bandwidth</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
+
+<p>Property to represent current (available) bandwidth associated with this resource.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Int</td>
+<td>Current (available) bandwidth of resource</td>
+</tr>
+</tbody></table>
+
+<h2 id="capacity">capacity</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
+
+<p>Property to represent maximum bandwidth associated with this resource.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Int</td>
+<td>Maximum bandwidth of resource</td>
+</tr>
+</tbody></table>
+
+<h2 id="latency">latency</h2>
+<pre class="highlight python"><code><span class="c"># TBD</span>
+</code></pre>
+
+<p>Computed property to return the network&rsquo;s latency.  This value is derived from the base_latency plus a function of the available bandwidth.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Int</td>
+<td>Computed delay associated with network traffic</td>
+</tr>
+</tbody></table>
+
+          <h1 id="exceptions">Exceptions</h1>
+
+<p>Custom Python Exceptions are provided for handling anomalous or flow control.</p>
+
+<h2 id="nodelackscapacity">NodeLacksCapacity</h2>
+<pre class="highlight python"><code><span class="k">raise</span> <span class="n">NodeLacksCapacity</span><span class="p">()</span>
+</code></pre>
+
+<p>Raised when a Node is asked to take on a <code class="prettyprint">Program</code> instance that requires resources
+that are unavailable on the given node.</p>
+
+<h3 id="usage">Usage</h3>
+
+<p><code class="prettyprint">raise NodeLacksCapacity()</code></p>
 
           <h1 id="getting-started">Getting Started</h1>
 
