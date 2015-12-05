@@ -317,6 +317,25 @@
 </tr>
 </tbody></table>
 
+<h2 id="racks">racks</h2>
+
+<p>A dictionary of the racks contained by the cluster.  Each entry uses the rack ID as
+the key.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dict</td>
+<td>A dictionary of the contained racks.</td>
+</tr>
+</tbody></table>
+
           <h1 id="nbsp-rack">&nbsp; Rack</h1>
 
 <p>The <code class="prettyprint">Rack</code> class represents a physical enclosure for <code class="prettyprint">Node</code> objects.  Racks may be connected to other racks and can be added to clusters.</p>
@@ -632,6 +651,25 @@
 <tr>
 <td>Network</td>
 <td><code class="prettyprint">Network</code> instance object</td>
+</tr>
+</tbody></table>
+
+<h2 id="nodes">nodes</h2>
+
+<p>A dictionary of the nodes contained by the rack.  Each entry uses the Node ID as
+the key.</p>
+
+<h3 id="return">Return</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dict</td>
+<td>A dictionary of the contained nodes.</td>
 </tr>
 </tbody></table>
 
@@ -1148,8 +1186,8 @@ through specific behaviors such as:</p>
 It can be found within clusters, racks, and nodes.</p>
 
 <h2 id="create">create( )</h2>
-<pre class="highlight python"><code><span class="c"># create a new network</span>
-<span class="k">pass</span>
+<pre class="highlight python"><code><span class="n">network_generator</span> <span class="o">=</span> <span class="n">Network</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">capacity</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">network_generator</span><span class="o">.</span><span class="nb">next</span><span class="p">()</span>
 </code></pre>
 
 <p>A factory method to return a new instance of the Network class.</p>
@@ -1165,16 +1203,22 @@ It can be found within clusters, racks, and nodes.</p>
 </tr>
 </thead><tbody>
 <tr>
+<td>capacity</td>
+<td>Int</td>
+<td></td>
+<td>Amount of total bandwidth in the network</td>
+</tr>
+<tr>
 <td>base_latency</td>
 <td>Int</td>
 <td></td>
 <td>Underlying delay associated with resource</td>
 </tr>
 <tr>
-<td>capacity</td>
-<td>Int</td>
-<td></td>
-<td>Amount of total bandwidth in the network</td>
+<td>parent</td>
+<td>Object</td>
+<td>None</td>
+<td>Reference to containing object</td>
 </tr>
 </tbody></table>
 
@@ -1193,11 +1237,8 @@ It can be found within clusters, racks, and nodes.</p>
 </tbody></table>
 
 <h2 id="send">send( )</h2>
-<pre class="highlight python"><code><span class="c"># create node</span>
-<span class="n">node_1</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">cpus</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-<span class="c"># send message from node_1 to another node with an ID of 12</span>
-<span class="n">node_1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">recipient</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">network</span> <span class="o">=</span> <span class="n">Network</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">capacity</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="nb">next</span><span class="p">()</span>
+<span class="n">network</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </code></pre>
 
 <p>Instance method to send a message onto the network.  This will remove available bandwidth.</p>
@@ -1215,8 +1256,22 @@ It can be found within clusters, racks, and nodes.</p>
 <tr>
 <td>size</td>
 <td>Int</td>
-<td>10</td>
+<td></td>
 <td>Size of message</td>
+</tr>
+</tbody></table>
+
+<h3 id="throws">Throws</h3>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BandwidthExceeded</td>
+<td>The network resource has exceeded its capacity.</td>
 </tr>
 </tbody></table>
 
@@ -1229,8 +1284,8 @@ It can be found within clusters, racks, and nodes.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>Boolean</td>
-<td>Success of the operation</td>
+<td>None</td>
+<td>No result</td>
 </tr>
 </tbody></table>
 
@@ -1255,10 +1310,10 @@ It can be found within clusters, racks, and nodes.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>?</td>
+<td>size</td>
+<td>Int</td>
 <td></td>
-<td></td>
-<td></td>
+<td>Size of message</td>
 </tr>
 </tbody></table>
 
@@ -1271,8 +1326,8 @@ It can be found within clusters, racks, and nodes.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>?</td>
-<td></td>
+<td>None</td>
+<td>No result</td>
 </tr>
 </tbody></table>
 
